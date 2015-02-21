@@ -10,15 +10,12 @@ import java.util.Map;
  */
 class Syntax
 {
-    private final Syntax root;
     private final Map<String, Syntax> children = new HashMap<>();
     
     private ICommand command = null;
     
-    public Syntax(Syntax root, String[] path, ICommand command)
+    public Syntax(String[] path, ICommand command)
     {
-        this.root = root;
-        
         if(path.length == 0)
         {
             throw new UnsupportedOperationException("Cannot create syntax with an empty path!");
@@ -27,7 +24,7 @@ class Syntax
         if(path.length > 1)
         {
             String[] subPath = Arrays.copyOfRange(path, 1, path.length);
-            children.put(path[0], new Syntax(this, subPath, command));
+            children.put(path[0], new Syntax(subPath, command));
         }
         else
         {
