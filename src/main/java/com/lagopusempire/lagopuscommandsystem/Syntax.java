@@ -21,6 +21,7 @@ class Syntax
     {
         final PathElementParser parser = new PathElementParser(path[0]);
         final String[] pathElements = parser.parse();
+        final String[] subPath = Arrays.copyOfRange(path, 1, path.length);
         
         for(String pathElement : pathElements)
         {
@@ -31,7 +32,6 @@ class Syntax
 
             if(path.length > 1)
             {
-                final String[] subPath = Arrays.copyOfRange(path, 1, path.length);
                 children.get(pathElement).addSyntax(subPath, command);
             }
             else
