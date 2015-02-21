@@ -6,4 +6,10 @@ package com.lagopusempire.lagopuscommandsystem;
  */
 public class LagopusCommandSystem
 {
+    
+    
+    public void registerCommand(String syntax, ICommand command)
+    {
+        
+    }
 }
