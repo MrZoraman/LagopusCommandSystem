@@ -1,47 +1,26 @@
 package com.lagopusempire.lagopuscommandsystem.parsing;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author MrZoraman
  */
-class PathElementParser
+class PathElementParser extends ParserBase
 {
-    private final String pathElement;
-    
     public PathElementParser(String pathElement)
     {
-        this.pathElement = pathElement;
+        super(pathElement);
     }
-    
-    public String[] parse()
+
+    @Override
+    public void iterate(int index, char c)
     {
-        List<String> pathElements = new ArrayList<>();
-        
-        char[] chars = pathElement.toCharArray();
-        final StringBuilder builder = new StringBuilder();
-        for(int ii = 0; ii < chars.length; ii++)
+        switch(c)
         {
-            switch(chars[ii])
-            {
-                case '|':
-                    if(builder.length() > 0)
-                    {
-                        pathElements.add(builder.toString());
-                        builder.setLength(0);
-                    }
-                    continue;
-                default:
-                    builder.append(chars[ii]);
-            }
+            case '|':
+                flush();
+                break;
+            default:
+                push(c);
         }
-        if(builder.length() > 0)
-        {
-            pathElements.add(builder.toString());
-        }
-        
-        return pathElements.toArray(new String[pathElements.size()]);
     }
 }
