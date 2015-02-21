@@ -4,7 +4,7 @@ package com.lagopusempire.lagopuscommandsystem.parsing;
  *
  * @author MrZoraman
  */
-class PathElementParser extends ParserBase
+public class PathElementParser extends ParserBase
 {
     public PathElementParser(String pathElement)
     {

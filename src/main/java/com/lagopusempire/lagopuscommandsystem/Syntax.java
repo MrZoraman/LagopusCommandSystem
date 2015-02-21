@@ -1,9 +1,8 @@
 package com.lagopusempire.lagopuscommandsystem;
 
-import java.util.ArrayList;
+import com.lagopusempire.lagopuscommandsystem.parsing.PathElementParser;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,20 +19,25 @@ class Syntax
     
     public void addSyntax(String[] path, ICommand command)
     {
-        final String pathElement = path[0];
-        if(!children.containsKey(pathElement))
-        {
-            children.put(pathElement, new Syntax());
-        }
+        final PathElementParser parser = new PathElementParser(path[0]);
+        final String[] pathElements = parser.parse();
         
-        if(path.length > 1)
+        for(String pathElement : pathElements)
         {
-            final String[] subPath = Arrays.copyOfRange(path, 1, path.length);
-            children.get(pathElement).addSyntax(subPath, command);
-        }
-        else
-        {
-            children.get(pathElement).command = command;
+            if(!children.containsKey(pathElement))
+            {
+                children.put(pathElement, new Syntax());
+            }
+
+            if(path.length > 1)
+            {
+                final String[] subPath = Arrays.copyOfRange(path, 1, path.length);
+                children.get(pathElement).addSyntax(subPath, command);
+            }
+            else
+            {
+                children.get(pathElement).command = command;
+            }
         }
     }
     
