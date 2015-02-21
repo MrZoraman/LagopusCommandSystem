@@ -48,6 +48,12 @@ public class MainTest
         root.addSyntax(cmd7, new TestCommand());
         
         root.print(0);
+        
+        System.out.println("---");
+        String[] cmd8 = {"a", "b|c", "d"};
+        root = new Syntax();
+        root.addSyntax(cmd8, new TestCommand());
+        root.print(0);
     }
     
     private class TestCommand implements ICommand
