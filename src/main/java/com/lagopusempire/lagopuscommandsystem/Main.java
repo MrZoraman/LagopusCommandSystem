@@ -8,15 +8,20 @@ import java.util.Scanner;
  */
 public class Main
 {
-    public static void main(String[] _args)
+    public static void main(String[] args)
+    {
+        new Main();
+    }
+    
+    public Main()
     {
         Scanner scan = new Scanner(System.in);
         LagopusCommandSystem lcs = new LagopusCommandSystem();
         
-        lcs.registerCommand("a", (preargs, args) -> {System.out.println("Hello!");});
-        lcs.registerCommand("a b", (preargs, args) -> {System.out.println("wah!");});
+        lcs.registerCommand("a", this::a);
+        lcs.registerCommand("a b", this::a_b);
         //TODO: 'ab' = wah!
-        lcs.registerCommand("b", (preargs, args) -> {System.out.println("Hello again!!");});
+        lcs.registerCommand("b", this::b);
         
         while(true)
         {
@@ -27,5 +32,20 @@ public class Main
             else
                 lcs.execute(input);
         }
+    }
+    
+    public void a(String[] preargs, String[] args)
+    {
+        System.out.println("Hello!");
+    }
+    
+    public void a_b(String[] preargs, String[] args)
+    {
+        System.out.println("wah!");
+    }
+    
+    public void b(String[] preargs, String[] args)
+    {
+        System.out.println("Hello again!");
     }
 }
