@@ -44,24 +44,60 @@ class Syntax
     
     public ICommand matchCommand(String path)
     {
+        path = path.trim();
+        final SyntaxMatchPackage bestMatchPack = findBestMatch(path);
+        
+        if(bestMatchPack == null || bestMatchPack.bestMatch == null) return command;
+        
+        final int matchIndex = bestMatchPack.matchIndex;
+        final Syntax bestMatch = bestMatchPack.bestMatch;
+        
+        if(bestMatch == null)
+        {
+            if(children.keySet().contains("*"))
+            {
+                return children.get("*").matchCommand(removeFirstWord(path));
+            }
+        }
+        
+        return bestMatch.matchCommand(path.substring(matchIndex, path.length()));
+    }
+    
+    private class SyntaxMatchPackage
+    {
+        int matchIndex;
+        Syntax bestMatch;
+    }
+    
+    @SuppressWarnings("empty-statement")
+    private SyntaxMatchPackage findBestMatch(String path)
+    {
+        if(path.isEmpty()) return null;
+        
         final Set<String> childrenSyntaxPaths = children.keySet();
+        final char[] pathChars = path.toCharArray();
+        
+        int highestIndexMatch = 0;
+        Syntax bestMatch = null;
         for(String childSyntaxPath : childrenSyntaxPaths)
         {
             if(childSyntaxPath.equals("*")) continue;
             
-            if(path.startsWith(childSyntaxPath))
+            final char[] childSyntaxPathChars = childSyntaxPath.toCharArray();
+            int index = 0;
+            for(; index < childSyntaxPathChars.length && childSyntaxPathChars[index] == pathChars[index]; index++);//EMPTY STATEMENT
+            
+            if(index > highestIndexMatch)
             {
-                final String subPath = path.substring(childSyntaxPath.length(), path.length());
-                return children.get(childSyntaxPath).matchCommand(subPath);
+                highestIndexMatch = index;
+                bestMatch = children.get(childSyntaxPath);
             }
         }
         
-        if(childrenSyntaxPaths.contains("*"))
-        {
-            return children.get("*").matchCommand(removeFirstWord(path));
-        }
-        
-        return command;
+        SyntaxMatchPackage pack = new SyntaxMatchPackage();
+        pack.bestMatch = bestMatch;
+        pack.matchIndex = highestIndexMatch;
+        return pack;
     }
     
     private String removeFirstWord(String string)

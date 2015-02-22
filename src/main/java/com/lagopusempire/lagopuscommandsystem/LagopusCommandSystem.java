@@ -17,7 +17,8 @@ public class LagopusCommandSystem
         
         try
         {
-            root.addSyntax(parser.parse(), command);
+            String[] s = parser.parse();
+            root.addSyntax(s, command);
         }
         catch (ParseFailException e)
         {
