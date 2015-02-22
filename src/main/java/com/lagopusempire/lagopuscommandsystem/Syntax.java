@@ -42,24 +42,21 @@ class Syntax
         }
     }
     
-    public ICommand matchCommand(String path)
+    public CommandResult matchCommand(String path)
     {
         path = path.trim();
         final SyntaxMatchPackage bestMatchPack = findBestMatch(path);
         
-        if(bestMatchPack == null || bestMatchPack.bestMatch == null) return command;
+        if(bestMatchPack == null || bestMatchPack.bestMatch == null)
+        {
+            CommandResult result = new CommandResult();
+            result.command = command;
+            result.args = path.split(" ");
+            return result;
+        }
         
         final int matchIndex = bestMatchPack.matchIndex;
         final Syntax bestMatch = bestMatchPack.bestMatch;
-        
-//        if(bestMatch == null)
-//        {
-//            if(children.keySet().contains("*"))
-//            {
-//                String str = removeFirstWord(path);
-//                return children.get("*").matchCommand(str);
-//            }
-//        }
         
         return bestMatch.matchCommand(path.substring(matchIndex, path.length()));
     }

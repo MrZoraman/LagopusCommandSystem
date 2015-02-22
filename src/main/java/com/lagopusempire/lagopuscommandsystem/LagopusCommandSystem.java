@@ -37,10 +37,11 @@ public class LagopusCommandSystem
     
     public void execute(String input)
     {
-        ICommand cmd = root.matchCommand(input);
+        CommandResult result = root.matchCommand(input);
+        ICommand cmd = result.command;
         if(cmd == null)
             System.out.println("Command not found!");
         else
-            cmd.execute(null, null);
+            cmd.execute(null, result.args);
     }
 }
