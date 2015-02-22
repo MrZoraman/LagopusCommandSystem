@@ -77,6 +77,6 @@ Add this to your dependencies
 <dependency>
     <artifactId>LagopusCommandSystem</artifactId>
     <groupId>com.lagopusempire</groupId>
-    <version>1.0</version>
+    <version>1.1</version>
 </dependency>
 ```
