@@ -8,6 +8,7 @@ command system works.
 
 # Javadoc
 I have [javadocs](jd.lagopusempire.com/lcs)!
+If it's not documented, then you shoudln't need to use it.
 
 # Simple code example
 First you need a class that the command system will manage. This can be 
