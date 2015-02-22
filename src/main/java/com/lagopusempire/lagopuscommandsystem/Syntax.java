@@ -52,13 +52,14 @@ class Syntax
         final int matchIndex = bestMatchPack.matchIndex;
         final Syntax bestMatch = bestMatchPack.bestMatch;
         
-        if(bestMatch == null)
-        {
-            if(children.keySet().contains("*"))
-            {
-                return children.get("*").matchCommand(removeFirstWord(path));
-            }
-        }
+//        if(bestMatch == null)
+//        {
+//            if(children.keySet().contains("*"))
+//            {
+//                String str = removeFirstWord(path);
+//                return children.get("*").matchCommand(str);
+//            }
+//        }
         
         return bestMatch.matchCommand(path.substring(matchIndex, path.length()));
     }
@@ -94,10 +95,26 @@ class Syntax
             }
         }
         
+        if(bestMatch == null)
+        {
+            if(childrenSyntaxPaths.contains("*"))
+            {
+                bestMatch = children.get("*");
+                highestIndexMatch = getFirstWordLength(path);
+            }
+        }
+        
         SyntaxMatchPackage pack = new SyntaxMatchPackage();
         pack.bestMatch = bestMatch;
         pack.matchIndex = highestIndexMatch;
         return pack;
+    }
+    
+    private int getFirstWordLength(String string)
+    {
+        if(!string.contains(" ")) return string.length();
+        
+        return string.split(" ")[0].length();
     }
     
     private String removeFirstWord(String string)
