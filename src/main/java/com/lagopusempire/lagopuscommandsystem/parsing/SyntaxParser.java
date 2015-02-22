@@ -25,7 +25,7 @@ public class SyntaxParser extends ParserBase
                 openBraceIndex = index;
                 break;
             case '}':
-                if(!inBraces) throw new ParseFailException("Parsing error! Braces don't match!", index);
+                if(!inBraces) throw new ParseFailException("Braces don't match!", index);
                 inBraces = false;
                 break;
             case ' ':
