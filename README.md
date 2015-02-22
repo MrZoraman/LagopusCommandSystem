@@ -7,7 +7,7 @@ and play. However, you also get a large amount of control over how the
 command system works.
 
 # Javadoc
-I have javadocs at jd.lagopusempire.com/lcs
+I have javadocs at (jd.lagopusempire.com/lcs)
 
 # Simple code example
 First you need a class that the command system will manage. This can be 
@@ -15,7 +15,7 @@ anything you want.
 ```java
 interface ICommand
 {
-    public void execute(String[] args);
+    public void execute(String[] preArgs, String[] args);
 }
 ```
 
@@ -27,7 +27,7 @@ public class SimpleCommandSystem
 
     public SimpleCommandSystem()
     {
-        cs.registerCommand("test", (args) -> {System.out.println("test complete!");});
+        cs.registerCommand("test", (preArgs, args) -> {System.out.println("test complete!");});
     }
 
     public void onCommand(String input)
@@ -35,16 +35,16 @@ public class SimpleCommandSystem
         CommandResult<ICommand> result = cs.getCommand(input);
         if(result.command == null) System.out.println("Unknown command!");
 
-        result.command.execute(result.args);
+        result.command.execute(result.preArgs, result.args);
     }
 }
 ```
 
-When onCommand("test") is called, the command system will match "test" to the cooresponding command (in our case, it just simply prints "test complete!"). 
+When onCommand("test") is called, the command system will match "test" to the corresponding command (in our case, it just simply prints "test complete!"). 
 Of course, our command syntaxes and syntax trees can be much more complex.
 
 # syntax parsing
-The command system takes the cooresponding command syntax and parses it to make it easier for you to make complex command trees.
+The command system takes the corresponding command syntax and parses it to make it easier for you to make complex command trees.
 Some examples are listed below:
 
 `a b c` -> the user command would be matched to someone inputting "a b c"
@@ -52,3 +52,7 @@ Some examples are listed below:
 `a b|c d` -> this matches the input to both inputs "a b d" and "a c d"
 
 `a b|{c d}` -> this matches the input to both "a b" and "a c d"
+
+`a * c` -> this matches input "a * c", where * can be anything. Wildcard inputs are put in the preArgs array.
+
+There are more examples in the unit tests.
