@@ -4,9 +4,9 @@ package com.lagopusempire.lagopuscommandsystem.parsing;
  *
  * @author MrZoraman
  */
-public class SyntaxParser extends ParserBase
+public class SpaceParser extends SyntaxParserBase
 {
-    public SyntaxParser(String syntax)
+    public SpaceParser(String syntax)
     {
         super(syntax);
     }

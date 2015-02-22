@@ -13,7 +13,7 @@ public class PathElementParserTest
     public void testPathElementSplitting()
     {
         String str = "|a|b b||c|d|e||";
-        PathElementParser parser = new PathElementParser(str);
+        ElementParser parser = new ElementParser(str);
         String[] parts = parser.parse();
         String[] expected = {"a", "b b", "c", "d", "e"};
         

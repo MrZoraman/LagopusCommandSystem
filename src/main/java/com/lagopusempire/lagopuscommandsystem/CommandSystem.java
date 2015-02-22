@@ -1,7 +1,7 @@
 package com.lagopusempire.lagopuscommandsystem;
 
 import com.lagopusempire.lagopuscommandsystem.parsing.ParseFailException;
-import com.lagopusempire.lagopuscommandsystem.parsing.SyntaxParser;
+import com.lagopusempire.lagopuscommandsystem.parsing.SpaceParser;
 import java.util.ArrayList;
 
 /**
@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class CommandSystem<T>
 {
-    private final Syntax<T> root = new Syntax<>();
+    private final SyntaxElement<T> root = new SyntaxElement<>();
     private boolean safeParsingMode = true;
     
     /**
@@ -51,7 +51,7 @@ public class CommandSystem<T>
      */
     public boolean registerCommand(String syntax, T command)
     {
-        final SyntaxParser parser = new SyntaxParser(syntax);
+        final SpaceParser parser = new SpaceParser(syntax);
         
         try
         {

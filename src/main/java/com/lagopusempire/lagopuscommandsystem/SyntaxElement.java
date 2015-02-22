@@ -1,6 +1,6 @@
 package com.lagopusempire.lagopuscommandsystem;
 
-import com.lagopusempire.lagopuscommandsystem.parsing.PathElementParser;
+import com.lagopusempire.lagopuscommandsystem.parsing.ElementParser;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -11,17 +11,17 @@ import java.util.Set;
  *
  * @author MrZoraman
  */
-class Syntax<T>
+class SyntaxElement<T>
 {
-    private final Map<String, Syntax> children = new HashMap<>();
+    private final Map<String, SyntaxElement> children = new HashMap<>();
     
     private T command = null;
     
-    public Syntax() { }
+    public SyntaxElement() { }
     
     void addSyntax(String[] path, T command)
     {
-        final PathElementParser parser = new PathElementParser(path[0]);
+        final ElementParser parser = new ElementParser(path[0]);
         final String[] pathElements = parser.parse();
         final String[] subPath = Arrays.copyOfRange(path, 1, path.length);
         
@@ -29,7 +29,7 @@ class Syntax<T>
         {
             if(!children.containsKey(pathElement))
             {
-                children.put(pathElement, new Syntax());
+                children.put(pathElement, new SyntaxElement());
             }
 
             if(path.length > 1)
@@ -63,7 +63,7 @@ class Syntax<T>
         }
         
         final int matchIndex = bestMatchPack.matchIndex;
-        final Syntax bestMatch = bestMatchPack.bestMatch;
+        final SyntaxElement bestMatch = bestMatchPack.bestMatch;
         
         return bestMatch.matchCommand(path.substring(matchIndex, path.length()), preArgs);
     }
@@ -71,7 +71,7 @@ class Syntax<T>
     private class SyntaxMatchPackage
     {
         int matchIndex;
-        Syntax bestMatch;
+        SyntaxElement bestMatch;
         String wildcard;
     }
     
@@ -84,7 +84,7 @@ class Syntax<T>
         final char[] pathChars = path.toCharArray();
         
         int highestIndexMatch = 0;
-        Syntax bestMatch = null;
+        SyntaxElement bestMatch = null;
         String wildcard = null;
         
         for(String childSyntaxPath : childrenSyntaxPaths)
@@ -132,7 +132,7 @@ class Syntax<T>
         for(String path : children.keySet())
         {
             printPreSpacing(level);
-            Syntax child = children.get(path);
+            SyntaxElement child = children.get(path);
             System.out.println(path + ": " + (child.command != null));
             child.print(level + 1);
         }

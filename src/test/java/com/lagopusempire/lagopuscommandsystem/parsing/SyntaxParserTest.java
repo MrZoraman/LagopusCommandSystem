@@ -13,7 +13,7 @@ public class SyntaxParserTest
     public void testElementPartSplitting()
     {
         String str = "a b c {d e} f {g h i j}";
-        SyntaxParser parser = new SyntaxParser(str);
+        SpaceParser parser = new SpaceParser(str);
         
         String[] expected = {"a", "b", "c", "d e", "f", "g h i j"};
         String[] actual = parser.parse();

@@ -7,14 +7,14 @@ import java.util.List;
  *
  * @author MrZoraman
  */
-public abstract class ParserBase
+public abstract class SyntaxParserBase
 {
     private final String script;
     
     private final StringBuilder builder = new StringBuilder();
     private final List<String> elements = new ArrayList<>();
     
-    public ParserBase(String script)
+    public SyntaxParserBase(String script)
     {
         this.script = script;
     }
