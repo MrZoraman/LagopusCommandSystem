@@ -1,4 +1,4 @@
-# Lagopus Command System
+# Lagopus Command System Library
 Powerful command parsing system!
 
 This library was written to be usable in any project. As a result of that,
