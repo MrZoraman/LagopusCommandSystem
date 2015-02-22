@@ -19,7 +19,7 @@ class Syntax<T>
     
     public Syntax() { }
     
-    public void addSyntax(String[] path, T command)
+    void addSyntax(String[] path, T command)
     {
         final PathElementParser parser = new PathElementParser(path[0]);
         final String[] pathElements = parser.parse();
@@ -43,7 +43,7 @@ class Syntax<T>
         }
     }
     
-    public CommandResult matchCommand(String path, List<String> preArgs)
+    CommandResult matchCommand(String path, List<String> preArgs)
     {
         path = path.trim();
         final SyntaxMatchPackage bestMatchPack = findBestMatch(path);
@@ -127,7 +127,7 @@ class Syntax<T>
         return string.split(" ")[0];
     }
     
-    public void print(int level)
+    void print(int level)
     {
         for(String path : children.keySet())
         {
