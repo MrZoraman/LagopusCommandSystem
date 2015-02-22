@@ -1,6 +1,11 @@
 # Lagopus Command System Library
 Powerful command parsing system!
 
+This is NOT a command line argument parsing library. Rather, this library
+is designed to help parse commands that are inputted by the user during
+the runtime of an application. Useful for things like server consoles
+or the likes.
+
 This library was written to be usable in any project. As a result of that,
 There's a little bit more you have to do on your side, so it's not plug
 and play. However, you also get a large amount of control over how the
