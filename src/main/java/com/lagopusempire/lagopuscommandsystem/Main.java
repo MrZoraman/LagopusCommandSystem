@@ -17,7 +17,7 @@ public class Main
     public Main()
     {
         Scanner scan = new Scanner(System.in);
-        LagopusCommandSystem lcs = new LagopusCommandSystem();
+        LagopusCommandSystem<ICommand> lcs = new LagopusCommandSystem<>();
         
         lcs.registerCommand("a", new CommandTester("Hello!"));
         lcs.registerCommand("a b", new CommandTester("Wah!"));
@@ -37,18 +37,30 @@ public class Main
         lcs.registerCommand("t * w v", new CommandTester("uwot"));
         
 //        lcs.registerCommand("x } oops", new CommandTester("oops"));
-        lcs.registerCommand("y {oops {", new CommandTester("woops"));
+//        lcs.registerCommand("y {oops {", new CommandTester("woops"));
 //        lcs.registerCommand("z { lady dady da", new CommandTester("dang"));
         
-//        while(true)
-//        {
-//            System.out.print("> ");
-//            String input = scan.nextLine();
-//            if(input.equalsIgnoreCase("exit"))
-//                break;
-//            else
-//                lcs.execute(input);
-//        }
+        while(true)
+        {
+            System.out.print("> ");
+            String input = scan.nextLine();
+            if(input.equalsIgnoreCase("exit"))
+                break;
+            else
+            {
+                CommandResult<ICommand> result = lcs.getCommand(input);
+                if(result.command == null)
+                {
+                    System.out.println("Command not found!");
+                }
+                else
+                {
+                    result.command.execute(result.preArgs, result.args);
+                }
+            }
+        }
+        
+        scan.close();
     }
     
     class CommandTester implements ICommand

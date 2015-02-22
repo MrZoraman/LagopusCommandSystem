@@ -4,9 +4,9 @@ package com.lagopusempire.lagopuscommandsystem;
  *
  * @author MrZoraman
  */
-public class CommandResult
+public class CommandResult<T>
 {
-    public ICommand command;
+    public T command;
     public String[] preArgs;
     public String[] args;
 }

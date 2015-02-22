@@ -11,11 +11,11 @@ import java.util.Set;
  *
  * @author MrZoraman
  */
-class Syntax
+class Syntax<T>
 {
     private final Map<String, Syntax> children = new HashMap<>();
     
-    private ICommand command = null;
+    private T command = null;
     
     public Syntax() { }
     

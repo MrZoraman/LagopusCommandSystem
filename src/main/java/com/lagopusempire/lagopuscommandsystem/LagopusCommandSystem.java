@@ -8,9 +8,9 @@ import java.util.ArrayList;
  *
  * @author MrZoraman
  */
-public class LagopusCommandSystem
+public class LagopusCommandSystem<T>
 {
-    private final Syntax root = new Syntax();
+    private final Syntax<T> root = new Syntax<>();
     
     public boolean registerCommand(String syntax, ICommand command)
     {
@@ -18,8 +18,7 @@ public class LagopusCommandSystem
         
         try
         {
-            String[] s = parser.parse();
-            root.addSyntax(s, command);
+            root.addSyntax(parser.parse(), command);
         }
         catch (ParseFailException e)
         {
@@ -30,13 +29,8 @@ public class LagopusCommandSystem
         return true;
     }
     
-    public void execute(String input)
+    public CommandResult<T> getCommand(String input)
     {
-        CommandResult result = root.matchCommand(input, new ArrayList<>());
-        ICommand cmd = result.command;
-        if(cmd == null)
-            System.out.println("Command not found!");
-        else
-            cmd.execute(result.preArgs, result.args);
+        return root.matchCommand(input, new ArrayList<>());
     }
 }
