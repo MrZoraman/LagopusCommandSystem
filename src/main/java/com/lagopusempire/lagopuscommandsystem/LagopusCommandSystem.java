@@ -2,6 +2,7 @@ package com.lagopusempire.lagopuscommandsystem;
 
 import com.lagopusempire.lagopuscommandsystem.parsing.ParseFailException;
 import com.lagopusempire.lagopuscommandsystem.parsing.SyntaxParser;
+import java.util.ArrayList;
 
 /**
  *
@@ -37,11 +38,11 @@ public class LagopusCommandSystem
     
     public void execute(String input)
     {
-        CommandResult result = root.matchCommand(input);
+        CommandResult result = root.matchCommand(input, new ArrayList<>());
         ICommand cmd = result.command;
         if(cmd == null)
             System.out.println("Command not found!");
         else
-            cmd.execute(null, result.args);
+            cmd.execute(result.preArgs, result.args);
     }
 }

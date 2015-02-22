@@ -3,6 +3,7 @@ package com.lagopusempire.lagopuscommandsystem;
 import com.lagopusempire.lagopuscommandsystem.parsing.PathElementParser;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -42,7 +43,7 @@ class Syntax
         }
     }
     
-    public CommandResult matchCommand(String path)
+    public CommandResult matchCommand(String path, List<String> preArgs)
     {
         path = path.trim();
         final SyntaxMatchPackage bestMatchPack = findBestMatch(path);
@@ -52,19 +53,26 @@ class Syntax
             CommandResult result = new CommandResult();
             result.command = command;
             result.args = path.split(" ");
+            result.preArgs = preArgs.toArray(new String[preArgs.size()]);
             return result;
+        }
+        
+        if(bestMatchPack.wildcard != null)
+        {
+            preArgs.add(bestMatchPack.wildcard);
         }
         
         final int matchIndex = bestMatchPack.matchIndex;
         final Syntax bestMatch = bestMatchPack.bestMatch;
         
-        return bestMatch.matchCommand(path.substring(matchIndex, path.length()));
+        return bestMatch.matchCommand(path.substring(matchIndex, path.length()), preArgs);
     }
     
     private class SyntaxMatchPackage
     {
         int matchIndex;
         Syntax bestMatch;
+        String wildcard;
     }
     
     @SuppressWarnings("empty-statement")
@@ -77,6 +85,8 @@ class Syntax
         
         int highestIndexMatch = 0;
         Syntax bestMatch = null;
+        String wildcard = null;
+        
         for(String childSyntaxPath : childrenSyntaxPaths)
         {
             if(childSyntaxPath.equals("*")) continue;
@@ -97,21 +107,24 @@ class Syntax
             if(childrenSyntaxPaths.contains("*"))
             {
                 bestMatch = children.get("*");
-                highestIndexMatch = getFirstWordLength(path);
+                String firstWord = getFirstWord(path);
+                highestIndexMatch = firstWord.length();
+                wildcard = firstWord;
             }
         }
         
         SyntaxMatchPackage pack = new SyntaxMatchPackage();
         pack.bestMatch = bestMatch;
         pack.matchIndex = highestIndexMatch;
+        pack.wildcard = wildcard;
         return pack;
     }
     
-    private int getFirstWordLength(String string)
+    private String getFirstWord(String string)
     {
-        if(!string.contains(" ")) return string.length();
+        if(!string.contains(" ")) return string;
         
-        return string.split(" ")[0].length();
+        return string.split(" ")[0];
     }
     
     private String removeFirstWord(String string)

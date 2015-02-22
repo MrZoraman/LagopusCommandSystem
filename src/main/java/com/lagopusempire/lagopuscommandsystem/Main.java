@@ -30,6 +30,12 @@ public class Main
         
         lcs.registerCommand("n * o", new CommandTester("the world is broken!"));
         
+        lcs.registerCommand("p * q * s", new CommandTester("I don't even know at this point!"));
+        
+        lcs.registerCommand("t * * v", new CommandTester("why?!"));
+        
+        lcs.registerCommand("t * w v", new CommandTester("uwot"));
+        
         while(true)
         {
             System.out.print("> ");
@@ -54,7 +60,7 @@ public class Main
         public void execute(String[] preArgs, String[] args)
         {
             System.out.println("Command executed!");
-//            System.out.println("preArgs: " + Arrays.toString(preArgs));
+            System.out.println("preArgs: " + Arrays.toString(preArgs));
             System.out.println("args: " + Arrays.toString(args));
             System.out.println("Message: " + str);
         }
