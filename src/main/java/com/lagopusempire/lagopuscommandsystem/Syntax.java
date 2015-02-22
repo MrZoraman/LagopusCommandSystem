@@ -127,14 +127,6 @@ class Syntax<T>
         return string.split(" ")[0];
     }
     
-    private String removeFirstWord(String string)
-    {
-        if(!string.contains(" ")) return string;
-        
-        final String[] parts = string.split(" ");
-        return string.substring(parts[0].length(), string.length());
-    }
-    
     public void print(int level)
     {
         for(String path : children.keySet())
