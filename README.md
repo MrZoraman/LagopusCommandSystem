@@ -62,8 +62,8 @@ Add this to your repositories:
 ```xml
 <repository>
     <id>Lagopus Empire Repo</id>
-     <name>Lagopus Empire Repo-releases</name>
-     <url>http://repo.lagopusempire.com/artifactory/lagopus-empire-repo</url>
+    <name>Lagopus Empire Repo-releases</name>
+    <url>http://repo.lagopusempire.com/artifactory/lagopus-empire-repo</url>
 </repository>
 ```
 Add this to your dependencies
