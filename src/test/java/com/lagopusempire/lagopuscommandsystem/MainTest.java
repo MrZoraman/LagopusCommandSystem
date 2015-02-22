@@ -27,7 +27,7 @@ public class MainTest
     {
         try (Scanner scan = new Scanner(System.in))
         {
-            LagopusCommandSystem<ICommand> lcs = new LagopusCommandSystem<>();
+            CommandSystem<ICommand> lcs = new CommandSystem<>();
             
             lcs.registerCommand("a", new CommandTester("Hello!"));
             lcs.registerCommand("a b", new CommandTester("Wah!"));

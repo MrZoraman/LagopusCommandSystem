@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  * @author MrZoraman
  */
-public class LagopusCommandSystem<T>
+public class CommandSystem<T>
 {
     private final Syntax<T> root = new Syntax<>();
     
