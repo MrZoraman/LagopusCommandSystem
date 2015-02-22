@@ -12,7 +12,7 @@ and play. However, you also get a large amount of control over how the
 command system works.
 
 # Javadoc
-I have [javadocs](jd.lagopusempire.com/lcs)!
+I have [javadocs](http://www.jd.lagopusempire.com/lcs/)!
 If it's not documented, then you shoudln't need to use it.
 
 # Simple code example
