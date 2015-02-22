@@ -6,7 +6,7 @@
     
     <groupId>com.lagopusempire</groupId>
     <artifactId>LagopusCommandSystem</artifactId>
-    <version>1.0</version>
+    <version>0.9</version>
     <packaging>jar</packaging>
     
     <name>Lagopus Command System</name>
@@ -63,11 +63,11 @@
         </license>
     </licenses>
     
-<!--    <distributionManagement>
+    <distributionManagement>
         <repository>
-            <id>lagopusempire-repository</id>
-            <name>Lagopus Empire Repository</name>
-            <url>ftp://repo.lagopusempire.com</url>
+            <id>lago-repo</id>
+            <name>Lagopus Empire Repo-releases</name>
+            <url>http://repo.lagopusempire.com/artifactory/lagopus-empire-repo</url>
         </repository>
-    </distributionManagement>-->
+    </distributionManagement>
 </project>
