@@ -31,6 +31,6 @@ public class LagopusCommandSystem<T>
     
     public CommandResult<T> getCommand(String input)
     {
-        return root.matchCommand(input, new ArrayList<>());
+        return root.matchCommand(input, new ArrayList<String>());
     }
 }
