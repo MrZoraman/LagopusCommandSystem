@@ -48,7 +48,7 @@ public class MainTest
             lcs.registerCommand("t * w v", new CommandTester("uwot"));
             
 //        lcs.registerCommand("x } oops", new CommandTester("oops"));
-//        lcs.registerCommand("y {oops {", new CommandTester("woops"));
+        lcs.registerCommand("y {oops {", new CommandTester("woops"));
 //        lcs.registerCommand("z { lady dady da", new CommandTester("dang"));
             
             while(true)

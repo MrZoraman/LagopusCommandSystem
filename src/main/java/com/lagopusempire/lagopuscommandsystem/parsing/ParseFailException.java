@@ -8,7 +8,7 @@ import java.util.Iterator;
  *
  * @author MrZoraman
  */
-public class ParseFailException extends RuntimeException implements Iterator<Integer>
+public class ParseFailException extends RuntimeException
 {
     private final int[] parseFailIndexes;
     int indexRetrieved = 0;
@@ -18,18 +18,6 @@ public class ParseFailException extends RuntimeException implements Iterator<Int
         super(message);
         this.parseFailIndexes = parseFailIndex;
         Arrays.sort(parseFailIndexes);
-    }
-
-    @Override
-    public boolean hasNext()
-    {
-        return indexRetrieved < parseFailIndexes.length;
-    }
-
-    @Override
-    public Integer next()
-    {
-        return parseFailIndexes[indexRetrieved++];
     }
     
     public void print(String problemLine, PrintStream stream)
