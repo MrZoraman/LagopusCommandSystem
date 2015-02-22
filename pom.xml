@@ -63,11 +63,11 @@
         </license>
     </licenses>
     
-    <distributionManagement>
+<!--    <distributionManagement>
         <repository>
             <id>lagopusempire-repository</id>
             <name>Lagopus Empire Repository</name>
             <url>ftp://repo.lagopusempire.com</url>
         </repository>
-    </distributionManagement>
+    </distributionManagement>-->
 </project>
