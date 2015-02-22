@@ -56,3 +56,21 @@ Some examples are listed below:
 `a * c` -> this matches input "a * c", where * can be anything. Wildcard inputs are put in the preArgs array.
 
 There are more examples in the unit tests.
+
+# maven
+Add this to your repositories:
+```xml
+<repository>
+    <id>Lagopus Empire Repo</id>
+     <name>Lagopus Empire Repo-releases</name>
+     <url>http://repo.lagopusempire.com/artifactory/lagopus-empire-repo</url>
+</repository>
+```
+Add this to your dependencies
+```xml
+<dependency>
+    <artifactId>LagopusCommandSystem</artifactId>
+    <groupId>com.lagopusempire</groupId>
+    <version>1.0</version>
+</dependency>
+```
