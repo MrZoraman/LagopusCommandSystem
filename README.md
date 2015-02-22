@@ -7,7 +7,7 @@ and play. However, you also get a large amount of control over how the
 command system works.
 
 # Javadoc
-I have javadocs at (jd.lagopusempire.com/lcs)
+I have [javadocs](jd.lagopusempire.com/lcs)!
 
 # Simple code example
 First you need a class that the command system will manage. This can be 
