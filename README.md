@@ -1,2 +1,54 @@
-# LagopusCommandSystem
-Powerful command parsing system
+# Lagopus Command System
+Powerful command parsing system!
+
+This library was written to be usable in any project. As a result of that,
+There's a little bit more you have to do on your side, so it's not plug
+and play. However, you also get a large amount of control over how the
+command system works.
+
+# Javadoc
+I have javadocs at jd.lagopusempire.com/lcs
+
+# Simple code example
+First you need a class that the command system will manage. This can be 
+anything you want.
+```java
+interface ICommand
+{
+    public void execute(String[] args);
+}
+```
+
+Now for the actual use of the library.
+```java
+public class SimpleCommandSystem
+{
+    private CommandSystem<ICommand> cs = new CommandSystem<>();
+
+    public SimpleCommandSystem()
+    {
+        cs.registerCommand("test", (args) -> {System.out.println("test complete!");});
+    }
+
+    public void onCommand(String input)
+    {
+        CommandResult<ICommand> result = cs.getCommand(input);
+        if(result.command == null) System.out.println("Unknown command!");
+
+        result.command.execute(result.args);
+    }
+}
+```
+
+When onCommand("test") is called, the command system will match "test" to the cooresponding command (in our case, it just simply prints "test complete!"). 
+Of course, our command syntaxes and syntax trees can be much more complex.
+
+# syntax parsing
+The command system takes the cooresponding command syntax and parses it to make it easier for you to make complex command trees.
+Some examples are listed below:
+
+`a b c` -> the user command would be matched to someone inputting "a b c"
+
+`a b|c d` -> this matches the input to both inputs "a b d" and "a c d"
+
+`a b|{c d}` -> this matches the input to both "a b" and "a c d"
