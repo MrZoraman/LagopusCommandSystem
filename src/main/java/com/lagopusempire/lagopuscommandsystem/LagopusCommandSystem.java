@@ -12,7 +12,7 @@ public class LagopusCommandSystem<T>
 {
     private final Syntax<T> root = new Syntax<>();
     
-    public boolean registerCommand(String syntax, ICommand command)
+    public boolean registerCommand(String syntax, T command)
     {
         final SyntaxParser parser = new SyntaxParser(syntax);
         

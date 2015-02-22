@@ -19,7 +19,7 @@ class Syntax<T>
     
     public Syntax() { }
     
-    public void addSyntax(String[] path, ICommand command)
+    public void addSyntax(String[] path, T command)
     {
         final PathElementParser parser = new PathElementParser(path[0]);
         final String[] pathElements = parser.parse();
