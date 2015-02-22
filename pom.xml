@@ -42,8 +42,10 @@
     <build>
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
+                <directory>.</directory>
+                <includes>
+                    <include>LICENSE.txt</include>
+                </includes>
             </resource>
         </resources>
         <plugins>
