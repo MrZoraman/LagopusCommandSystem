@@ -36,15 +36,19 @@ public class Main
         
         lcs.registerCommand("t * w v", new CommandTester("uwot"));
         
-        while(true)
-        {
-            System.out.print("> ");
-            String input = scan.nextLine();
-            if(input.equalsIgnoreCase("exit"))
-                break;
-            else
-                lcs.execute(input);
-        }
+//        lcs.registerCommand("x } oops", new CommandTester("oops"));
+        lcs.registerCommand("y {oops {", new CommandTester("woops"));
+//        lcs.registerCommand("z { lady dady da", new CommandTester("dang"));
+        
+//        while(true)
+//        {
+//            System.out.print("> ");
+//            String input = scan.nextLine();
+//            if(input.equalsIgnoreCase("exit"))
+//                break;
+//            else
+//                lcs.execute(input);
+//        }
     }
     
     class CommandTester implements ICommand

@@ -12,14 +12,17 @@ public class SyntaxParser extends ParserBase
     }
     
     private boolean inBraces = false;
+    private int openBraceIndex = 0;
 
     @Override
-    public void iterate(int index, char c)
+    protected void iterate(int index, char c)
     {
         switch(c)
         {
             case '{':
+                if(inBraces) throw new ParseFailException("Braces are already open!", index, openBraceIndex);
                 inBraces = true;
+                openBraceIndex = index;
                 break;
             case '}':
                 if(!inBraces) throw new ParseFailException("Parsing error! Braces don't match!", index);
@@ -35,5 +38,11 @@ public class SyntaxParser extends ParserBase
             default:
                 push(c);
         }
+    }
+    
+    @Override
+    protected void finished()
+    {
+        if(inBraces) throw new ParseFailException("Braces are still open!", openBraceIndex);
     }
 }

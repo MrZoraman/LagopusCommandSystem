@@ -12,7 +12,7 @@ public class PathElementParser extends ParserBase
     }
 
     @Override
-    public void iterate(int index, char c)
+    protected void iterate(int index, char c)
     {
         switch(c)
         {

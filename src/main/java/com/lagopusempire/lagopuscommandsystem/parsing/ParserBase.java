@@ -19,7 +19,9 @@ public abstract class ParserBase
         this.script = script;
     }
     
-    public abstract void iterate(int index, char c);
+    protected abstract void iterate(int index, char c);
+    
+    protected void finished() { }
     
     protected void flush()
     {
@@ -38,10 +40,13 @@ public abstract class ParserBase
     public String[] parse()
     {
         char[] chars = script.toCharArray();
-        for(int ii = 0; ii < chars.length; ii++)
+        int ii = 0;
+        for(ii = 0; ii < chars.length; ii++)
         {
             iterate(ii, chars[ii]);
         }
+        
+        finished();
         
         flush();
         

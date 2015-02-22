@@ -23,13 +23,7 @@ public class LagopusCommandSystem
         }
         catch (ParseFailException e)
         {
-            System.err.println(syntax);
-            for(int ii = 0; ii < e.getIndexFailedAt(); ii++)
-            {
-                System.err.print(" ");
-            }
-            System.err.println("^ ");
-            e.printStackTrace(System.err);
+            e.print(syntax, System.err);
             return false;
         }
         
