@@ -93,7 +93,9 @@ class SyntaxElement<T>
             final char[] childSyntaxPathChars = childSyntaxPath.toCharArray();
             
             int index = 0;
-            while(index < childSyntaxPathChars.length && childSyntaxPathChars[index] == pathChars[index])
+            while(index < childSyntaxPathChars.length 
+                    && index < pathChars.length
+                    && childSyntaxPathChars[index] == pathChars[index])
                 index++;
             
             if(index > highestIndexMatch)
