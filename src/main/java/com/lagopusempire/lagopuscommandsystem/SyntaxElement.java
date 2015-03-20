@@ -24,6 +24,12 @@ class SyntaxElement<T>
     
     void addSyntax(String[] path, T command)
     {
+        if(path.length == 0)
+        {
+            this.command = command;
+            return;
+        }
+        
         final ElementParser parser = new ElementParser(path[0]);
         final String[] pathElements = parser.parse();
         final String[] subPath = Arrays.copyOfRange(path, 1, path.length);

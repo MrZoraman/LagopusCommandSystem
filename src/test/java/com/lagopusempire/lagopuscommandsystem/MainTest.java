@@ -54,6 +54,8 @@ public class MainTest
             lcs.registerCommand("homenwinnigish", new CommandTester("Chicken n' winnigish"));
             lcs.registerCommand("home", new CommandTester("weiew"));
             
+            lcs.registerCommand("", new CommandTester("wot"));
+            
         
             lcs.printCommandTree(System.out);
             
