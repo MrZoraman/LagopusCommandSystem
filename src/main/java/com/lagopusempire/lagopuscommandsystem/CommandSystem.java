@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class CommandSystem<T>
 {
-    private final SyntaxElement<T> root = new SyntaxElement<>();
+    private final RootSyntaxElement<T> root = new RootSyntaxElement<>();
     private boolean safeParsingMode = true;
     
     /**

@@ -18,7 +18,7 @@ class SyntaxElement<T>
 
     private final Map<String, SyntaxElement> children = new HashMap<>();
     
-    private T command = null;
+    protected T command = null;
     
     SyntaxElement() { }
     
