@@ -59,7 +59,7 @@ class SyntaxElement<T>
         
         if(bestMatchPack == null || bestMatchPack.bestMatch == null)
         {
-            CommandResult result = new CommandResult();
+            final CommandResult<T> result = new CommandResult<>();
             result.command = command;
             result.args = path.split(" ");
             result.preArgs = preArgs.toArray(new String[preArgs.size()]);

@@ -56,6 +56,8 @@ public class MainTest
             
             lcs.registerCommand("", new CommandTester("wot"));
             
+            lcs.setUnknownCommand(new CommandTester("I have no clue what that is"));
+            
         
             lcs.printCommandTree(System.out);
             
