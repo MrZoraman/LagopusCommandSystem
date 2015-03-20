@@ -75,7 +75,6 @@ class SyntaxElement<T>
         String wildcard;
     }
     
-    @SuppressWarnings("empty-statement")
     private SyntaxMatchPackage findBestMatch(String path)
     {
         if(path.isEmpty()) return null;
@@ -92,8 +91,10 @@ class SyntaxElement<T>
             if(childSyntaxPath.equals("*")) continue;
             
             final char[] childSyntaxPathChars = childSyntaxPath.toCharArray();
+            
             int index = 0;
-            for(; index < childSyntaxPathChars.length && childSyntaxPathChars[index] == pathChars[index]; index++);//EMPTY STATEMENT
+            while(index < childSyntaxPathChars.length && childSyntaxPathChars[index] == pathChars[index])
+                index++;
             
             if(index > highestIndexMatch)
             {
