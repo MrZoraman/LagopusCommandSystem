@@ -20,7 +20,7 @@ class SyntaxElement<T>
     
     private T command = null;
     
-    public SyntaxElement() { }
+    SyntaxElement() { }
     
     void addSyntax(String[] path, T command)
     {
