@@ -2,6 +2,7 @@ package com.lagopusempire.lagopuscommandsystem;
 
 import com.lagopusempire.lagopuscommandsystem.parsing.ParseFailException;
 import com.lagopusempire.lagopuscommandsystem.parsing.SpaceParser;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 /**
@@ -105,5 +106,20 @@ public class CommandSystem<T>
     public void setSafeParsingMode(boolean mode)
     {
         this.safeParsingMode = mode;
+    }
+    
+    /**
+     * Prints the command tree to a prinstream.
+     * 
+     * This prints out the structure of the command tree. It shows what the
+     * command system sees, so you can get an idea on the behavior of the
+     * command system when the user types in commands. This is intended to be
+     * a useful debugging tool.
+     * 
+     * @param stream The print stream to print the output to.
+     */
+    public void printCommandTree(PrintStream stream)
+    {
+        root.print(stream, 0);
     }
 }

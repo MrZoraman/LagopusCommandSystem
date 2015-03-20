@@ -1,6 +1,7 @@
 package com.lagopusempire.lagopuscommandsystem;
 
 import com.lagopusempire.lagopuscommandsystem.parsing.ElementParser;
+import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.Set;
  */
 class SyntaxElement<T>
 {
+    private static final int TREE_SPACER = 4;
+
     private final Map<String, SyntaxElement> children = new HashMap<>();
     
     private T command = null;
@@ -130,22 +133,29 @@ class SyntaxElement<T>
         return string.split(" ")[0];
     }
     
-    void print(int level)
+    void print(PrintStream stream, int level)
     {
         for(String path : children.keySet())
         {
-            printPreSpacing(level);
+            printPreSpacing(stream, level);
             SyntaxElement child = children.get(path);
-            System.out.println(path + ": " + (child.command != null));
-            child.print(level + 1);
+            
+            final String commandString = child.command == null 
+                    ? "null" 
+                    : child.command.getClass().getSimpleName();
+            
+            stream.println(path + ": " + commandString);
+            child.print(stream, level + 1);
         }
     }
     
-    private void printPreSpacing(int level)
+    private void printPreSpacing(PrintStream stream, int level)
     {
-        for(int ii = 0; ii < level; ii++)
+        for(int spacesToPrint = 0;
+                spacesToPrint < TREE_SPACER * level;
+                spacesToPrint++)
         {
-            System.out.print("    ");
+            stream.print(" ");
         }
     }
 }

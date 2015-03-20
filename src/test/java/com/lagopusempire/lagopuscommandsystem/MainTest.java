@@ -45,10 +45,15 @@ public class MainTest
             lcs.registerCommand("t * * v", new CommandTester("why?!"));
             
             lcs.registerCommand("t * w v", new CommandTester("uwot"));
-            
-//        lcs.registerCommand("x } oops", new CommandTester("oops"));
-        lcs.registerCommand("y {oops {", new CommandTester("woops"));
-//        lcs.registerCommand("z { lady dady da", new CommandTester("dang"));
+//            
+////        lcs.registerCommand("x } oops", new CommandTester("oops"));
+//        lcs.registerCommand("y {oops {", new CommandTester("woops"));
+////        lcs.registerCommand("z { lady dady da", new CommandTester("dang"));
+//        
+//        lcs.registerCommand("{home set}|sethome", new CommandTester("woot"));
+//        lcs.registerCommand("home", new CommandTester("weiew"));
+        
+            lcs.printCommandTree(System.out);
             
             while(true)
             {
