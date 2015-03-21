@@ -61,13 +61,15 @@ public class CommandSystem<T>
         }
         catch (ParseFailException e)
         {
+            e.setProblemSyntax(syntax);
             if(safeParsingMode)
             {
                 throw e;
             }
             else
             {
-                e.print(syntax, System.err);
+//                e.print(syntax, System.err);
+                e.printStackTrace(System.err);
                 return false;
             }
         }

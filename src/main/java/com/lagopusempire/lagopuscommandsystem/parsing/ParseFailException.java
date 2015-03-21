@@ -12,7 +12,8 @@ import java.util.Arrays;
 public class ParseFailException extends RuntimeException
 {
     private final int[] parseFailIndexes;
-    int indexRetrieved = 0;
+    int indexRetrieved = 0;//TODO: what
+    private String problemSyntax = null;
     
     public ParseFailException(String message, int... parseFailIndex)
     {
@@ -21,33 +22,43 @@ public class ParseFailException extends RuntimeException
         Arrays.sort(parseFailIndexes);
     }
     
-    /**
-     * Prints the error to the specified print stream, along with relevant
-     * debug info.
-     * 
-     * This method provides useful info such as the nature of the syntax
-     * error, along with pointing to the exact point(s) where the parser
-     * experienced a problem. The stack trace is also printed.
-     * 
-     * @param problemLine This is the line that the command system failed to
-     *                    parse.
-     * @param stream      The stream to print error and other info to.
-     */
-    public void print(String problemLine, PrintStream stream)
+    public void setProblemSyntax(String problemSyntax)
     {
-        stream.println(problemLine);
-        int arrowsPrinted = 0;
-        int index = 0;
-        for(int ii = 0; ii < parseFailIndexes.length; ii++)
+        this.problemSyntax = problemSyntax;
+    }
+    
+    public String getProblemSyntax(String problemSyntax)
+    {
+        return problemSyntax;
+    }
+    
+    @Override
+    public void printStackTrace(PrintStream stream)
+    {
+        if(problemSyntax != null)
         {
-            for(; index < parseFailIndexes[ii] - arrowsPrinted; index++)
+            stream.println(problemSyntax);
+            printProblemArrows(stream);
+        }
+        
+        super.printStackTrace(stream);
+    }
+    
+    private void printProblemArrows(PrintStream stream)
+    {
+        int parseFailIndex = 0;
+        for(int ii = 0; ii < problemSyntax.length(); ii++)
+        {
+            if(parseFailIndexes[parseFailIndex] == ii)
+            {
+                stream.print("^");
+                parseFailIndex++;
+            }
+            else
             {
                 stream.print(" ");
             }
-            stream.print("^");
-            arrowsPrinted++;
         }
         stream.println();
-        printStackTrace(stream);
     }
 }
