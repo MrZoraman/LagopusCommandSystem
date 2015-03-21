@@ -40,8 +40,7 @@ public abstract class SyntaxParserBase
     public String[] parse()
     {
         char[] chars = script.toCharArray();
-        int ii = 0;
-        for(ii = 0; ii < chars.length; ii++)
+        for(int ii = 0; ii < chars.length; ii++)
         {
             iterate(ii, chars[ii]);
         }
