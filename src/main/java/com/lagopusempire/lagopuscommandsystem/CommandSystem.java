@@ -21,8 +21,9 @@ import java.util.ArrayList;
  */
 public class CommandSystem<T>
 {
-    private final SyntaxElement<T> root = new SyntaxElement<>();
+    private final RootSyntaxElement<T> root = new RootSyntaxElement<>();
     private boolean safeParsingMode = true;
+    private T unknownCommand = null;
     
     /**
      * Registers a command to the command system.
@@ -88,7 +89,21 @@ public class CommandSystem<T>
      */
     public CommandResult<T> getCommand(String input)
     {
-        return root.matchCommand(input, new ArrayList<String>());
+        final CommandResult<T> result = root.matchCommand(input, new ArrayList<String>());
+        
+        if(unknownCommand != null)
+        {
+            result.args = input.split(" ");
+            result.preArgs = new String[0];
+            result.command = unknownCommand;
+        }
+        
+        return result;
+    }
+    
+    public void setUnknownCommand(T unknownCommand)
+    {
+        this.unknownCommand = unknownCommand;
     }
     
     /**

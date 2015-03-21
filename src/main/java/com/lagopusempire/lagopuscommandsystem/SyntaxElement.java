@@ -18,12 +18,18 @@ class SyntaxElement<T>
 
     private final Map<String, SyntaxElement> children = new HashMap<>();
     
-    private T command = null;
+    protected T command = null;
     
-    public SyntaxElement() { }
+    SyntaxElement() { }
     
     void addSyntax(String[] path, T command)
     {
+        if(path.length == 0)
+        {
+            this.command = command;
+            return;
+        }
+        
         final ElementParser parser = new ElementParser(path[0]);
         final String[] pathElements = parser.parse();
         final String[] subPath = Arrays.copyOfRange(path, 1, path.length);
@@ -53,7 +59,7 @@ class SyntaxElement<T>
         
         if(bestMatchPack == null || bestMatchPack.bestMatch == null)
         {
-            CommandResult result = new CommandResult();
+            final CommandResult<T> result = new CommandResult<>();
             result.command = command;
             result.args = path.split(" ");
             result.preArgs = preArgs.toArray(new String[preArgs.size()]);
