@@ -101,6 +101,20 @@ public class CommandSystem<T>
         return result;
     }
     
+    /**
+     * Sets the command to be executed if the command system fails to find a
+     * command match.
+     * 
+     * If the command system fails to find a match, this command will be 
+     * executed. This can also be seen as the root node command, so if the
+     * user were to input a 'command' that is totally empty, this command will
+     * be executed.
+     * 
+     * The arguments will be filled with whatever the user typed in.
+     * 
+     * @param unknownCommand The command to execute when the command system
+     *                       cannot find a suitable command to execute.
+     */
     public void setUnknownCommand(T unknownCommand)
     {
         this.unknownCommand = unknownCommand;
