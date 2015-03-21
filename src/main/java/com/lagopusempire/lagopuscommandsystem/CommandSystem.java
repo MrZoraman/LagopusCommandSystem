@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class CommandSystem<T>
 {
-    private final RootSyntaxElement<T> root = new RootSyntaxElement<>();
+    private final SyntaxElement<T> root = new SyntaxElement<>();
     private boolean safeParsingMode = true;
     private T unknownCommand = null;
     
@@ -91,7 +91,7 @@ public class CommandSystem<T>
     {
         final CommandResult<T> result = root.matchCommand(input, new ArrayList<String>());
         
-        if(unknownCommand != null)
+        if(result.command == null && unknownCommand != null)
         {
             result.args = input.split(" ");
             result.preArgs = new String[0];
@@ -101,6 +101,20 @@ public class CommandSystem<T>
         return result;
     }
     
+    /**
+     * Sets the command to be executed if the command system fails to find a
+     * command match.
+     * 
+     * If the command system fails to find a match, this command will be 
+     * executed. This can also be seen as the root node command, so if the
+     * user were to input a 'command' that is totally empty, this command will
+     * be executed.
+     * 
+     * The arguments will be filled with whatever the user typed in.
+     * 
+     * @param unknownCommand The command to execute when the command system
+     *                       cannot find a suitable command to execute.
+     */
     public void setUnknownCommand(T unknownCommand)
     {
         this.unknownCommand = unknownCommand;
@@ -135,6 +149,11 @@ public class CommandSystem<T>
      */
     public void printCommandTree(PrintStream stream)
     {
+        final String unknownCommandString = unknownCommand == null
+                ? "null"
+                : unknownCommand.getClass().getSimpleName();
+        
+        stream.println("UNKNOWN_COMMAND: " + unknownCommandString);
         root.print(stream, 0);
     }
 }
