@@ -28,6 +28,7 @@ public class MainTest
         try (Scanner scan = new Scanner(System.in))
         {
             CommandSystem<ICommand> lcs = new CommandSystem<>();
+            lcs.setCaseSensitive(true);
             
             lcs.registerCommand("a", new CommandTester("Hello!"));
             lcs.registerCommand("a b", new CommandTester("Wah!"));
@@ -53,7 +54,7 @@ public class MainTest
             
             lcs.setUnknownCommand(new CommandTester("I have no clue what that is"));
             
-//            lcs.printCommandTree(System.out);
+            lcs.printCommandTree(System.out);
             
             while(true)
             {

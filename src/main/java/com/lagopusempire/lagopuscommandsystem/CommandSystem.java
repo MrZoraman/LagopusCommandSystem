@@ -23,6 +23,7 @@ public class CommandSystem<T>
 {
     private final SyntaxElement<T> root = new SyntaxElement<>();
     private T unknownCommand = null;
+    private boolean isCaseSensitive = false;
     
     /**
      * Registers a command to the command system.
@@ -47,6 +48,8 @@ public class CommandSystem<T>
      */
     public void registerCommand(String syntax, T command)
     {
+        if(!isCaseSensitive) syntax = syntax.toLowerCase();
+        
         final SpaceParser parser = new SpaceParser(syntax);
         root.addSyntax(parser.parse(), command);
     }
@@ -65,6 +68,8 @@ public class CommandSystem<T>
      */
     public CommandResult<T> getCommand(String input)
     {
+        if(!isCaseSensitive) input = input.toLowerCase();
+        
         final CommandResult<T> result = root.matchCommand(input, new ArrayList<String>());
         
         if(result.command == null && unknownCommand != null)
@@ -114,5 +119,35 @@ public class CommandSystem<T>
         
         stream.println("UNKNOWN_COMMAND: " + unknownCommandString);
         root.print(stream, 0);
+    }
+
+    /**
+     * Checks if the command system is case sensitive or not.
+     * @return True if it is case sensitive, false if it is not case sensitive.
+     * 
+     * @see #setCaseSensitive(boolean) setCaseSensitive
+     */
+    public boolean isIsCaseSensitive()
+    {
+        return isCaseSensitive;
+    }
+
+    /**
+     * Sets if the command system is case sensitive or not.
+     * 
+     * When the command system is not case sensitive, it will convert all of
+     * the syntaxes to lower case. This method should be called before any
+     * calls of the {@link #registerCommand(java.lang.String, java.lang.Object) registerCommand}
+     * method is called to assure that those commands are registered in the
+     * correct case sensitivity state.
+     * 
+     * Case sensitivity is set to false by default.
+     * 
+     * @param isCaseSensitive True, then the command system will be case
+     * sensitive. False and it will not be.
+     */
+    public void setCaseSensitive(boolean isCaseSensitive)
+    {
+        this.isCaseSensitive = isCaseSensitive;
     }
 }
