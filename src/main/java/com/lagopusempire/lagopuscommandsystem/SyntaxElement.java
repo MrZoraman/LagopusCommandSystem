@@ -15,6 +15,8 @@ import java.util.Set;
 class SyntaxElement<T>
 {
     private static final int TREE_SPACER = 4;
+    
+    private static boolean caseSensitive = false;
 
     private final Map<String, SyntaxElement> children = new HashMap<>();
     
@@ -105,11 +107,18 @@ class SyntaxElement<T>
             int index = 0;
             while(index < childSyntaxPathChars.length && index < pathChars.length)
             {
-                if(childSyntaxPathChars[index] == pathChars[index])
+                final char childChar = caseSensitive 
+                        ? childSyntaxPathChars[index] 
+                        : Character.toLowerCase(childSyntaxPathChars[index]);
+                final char pathChar = caseSensitive 
+                        ? pathChars[index] 
+                        : Character.toLowerCase(pathChars[index]);
+                
+                if(childChar == pathChar)
                 {
                     index++;
                 }
-                else if(childSyntaxPathChars[index] == ' ' || pathChars[index] == ' ')
+                else if(childChar == ' ' || pathChar == ' ')
                 {
                     continue outer;
                 }
@@ -178,5 +187,15 @@ class SyntaxElement<T>
         {
             stream.print(" ");
         }
+    }
+
+    public static boolean isCaseSensitive()
+    {
+        return caseSensitive;
+    }
+
+    public static void setCaseSensitive(boolean caseSensitive)
+    {
+        SyntaxElement.caseSensitive = caseSensitive;
     }
 }

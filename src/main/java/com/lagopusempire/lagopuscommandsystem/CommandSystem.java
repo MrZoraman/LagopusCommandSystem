@@ -23,7 +23,6 @@ public class CommandSystem<T>
 {
     private final SyntaxElement<T> root = new SyntaxElement<>();
     private T unknownCommand = null;
-    private boolean isCaseSensitive = false;
     
     /**
      * Registers a command to the command system.
@@ -48,8 +47,6 @@ public class CommandSystem<T>
      */
     public void registerCommand(String syntax, T command)
     {
-        if(!isCaseSensitive) syntax = syntax.toLowerCase();
-        
         final SpaceParser parser = new SpaceParser(syntax);
         root.addSyntax(parser.parse(), command);
     }
@@ -68,8 +65,6 @@ public class CommandSystem<T>
      */
     public CommandResult<T> getCommand(String input)
     {
-        if(!isCaseSensitive) input = input.toLowerCase();
-        
         final CommandResult<T> result = root.matchCommand(input, new ArrayList<String>());
         
         if(result.command == null && unknownCommand != null)
@@ -129,7 +124,7 @@ public class CommandSystem<T>
      */
     public boolean isIsCaseSensitive()
     {
-        return isCaseSensitive;
+        return SyntaxElement.isCaseSensitive();
     }
 
     /**
@@ -148,6 +143,6 @@ public class CommandSystem<T>
      */
     public void setCaseSensitive(boolean isCaseSensitive)
     {
-        this.isCaseSensitive = isCaseSensitive;
+        SyntaxElement.setCaseSensitive(isCaseSensitive);
     }
 }
