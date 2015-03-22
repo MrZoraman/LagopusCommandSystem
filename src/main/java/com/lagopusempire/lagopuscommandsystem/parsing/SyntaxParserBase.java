@@ -9,10 +9,10 @@ import java.util.List;
  */
 public abstract class SyntaxParserBase
 {
-    private final String script;
-    
     private final StringBuilder builder = new StringBuilder();
     private final List<String> elements = new ArrayList<>();
+    
+    protected final String script;
     
     public SyntaxParserBase(String script)
     {
@@ -39,9 +39,8 @@ public abstract class SyntaxParserBase
     
     public String[] parse()
     {
-        char[] chars = script.toCharArray();
-        int ii = 0;
-        for(ii = 0; ii < chars.length; ii++)
+        final char[] chars = script.toCharArray();
+        for(int ii = 0; ii < chars.length; ii++)
         {
             iterate(ii, chars[ii]);
         }

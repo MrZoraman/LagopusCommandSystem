@@ -95,6 +95,7 @@ class SyntaxElement<T>
         SyntaxElement bestMatch = null;
         String wildcard = null;
         
+        outer:
         for(String childSyntaxPath : childrenSyntaxPaths)
         {
             if(childSyntaxPath.equals("*")) continue;
@@ -102,10 +103,24 @@ class SyntaxElement<T>
             final char[] childSyntaxPathChars = childSyntaxPath.toCharArray();
             
             int index = 0;
-            while(index < childSyntaxPathChars.length 
-                    && index < pathChars.length
-                    && childSyntaxPathChars[index] == pathChars[index])
-                index++;
+            while(index < childSyntaxPathChars.length && index < pathChars.length)
+            {
+                if(childSyntaxPathChars[index] == pathChars[index])
+                {
+                    index++;
+                }
+                else if(childSyntaxPathChars[index] == ' ' || pathChars[index] == ' ')
+                {
+                    continue outer;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            
+            if(childSyntaxPathChars.length - 1 > index && childSyntaxPathChars[index + 1] != ' ')
+                continue;
             
             if(index > highestIndexMatch)
             {
