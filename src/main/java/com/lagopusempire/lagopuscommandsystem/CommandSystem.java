@@ -68,8 +68,7 @@ public class CommandSystem<T>
             }
             else
             {
-//                e.print(syntax, System.err);
-                e.printStackTrace(System.err);
+                e.printInfo(System.err);
                 return false;
             }
         }

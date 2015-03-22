@@ -32,33 +32,30 @@ public class ParseFailException extends RuntimeException
         return problemSyntax;
     }
     
-    @Override
-    public void printStackTrace(PrintStream stream)
+    public void printInfo(PrintStream stream)
     {
-        if(problemSyntax != null)
-        {
-            stream.println(problemSyntax);
-            printProblemArrows(stream);
-        }
-        
-        super.printStackTrace(stream);
+        stream.println(problemSyntax);
+        stream.println(makeProblemArrows('^'));
+        printStackTrace(stream);
     }
     
-    private void printProblemArrows(PrintStream stream)
+    public String makeProblemArrows(char arrow)
     {
+        final StringBuilder builder = new StringBuilder(problemSyntax.length());
+        
         int parseFailIndex = 0;
         for(int ii = 0; ii < problemSyntax.length(); ii++)
         {
             if(parseFailIndexes[parseFailIndex] == ii)
             {
-                stream.print("^");
+                builder.append(arrow);
                 parseFailIndex++;
             }
             else
             {
-                stream.print(" ");
+                builder.append(" ");
             }
         }
-        stream.println();
+        return builder.toString();
     }
 }
