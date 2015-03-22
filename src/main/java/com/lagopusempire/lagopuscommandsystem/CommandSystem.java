@@ -112,7 +112,7 @@ public class CommandSystem<T>
     }
     
     /**
-     * Prints the command tree to a prinstream.
+     * Prints the command tree to a printstream.
      * 
      * This prints out the structure of the command tree. It shows what the
      * command system sees, so you can get an idea on the behavior of the
