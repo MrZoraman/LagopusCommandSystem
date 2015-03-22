@@ -130,11 +130,9 @@ public class CommandSystem<T>
     /**
      * Sets if the command system is case sensitive or not.
      * 
-     * When the command system is not case sensitive, it will convert all of
-     * the syntaxes to lower case. This method should be called before any
-     * calls of the {@link #registerCommand(java.lang.String, java.lang.Object) registerCommand}
-     * method is called to assure that those commands are registered in the
-     * correct case sensitivity state.
+     * When the command system is not case sensitive, case will be ignored
+     * when matching the command. Arguments and preArguments will retain their
+     * case.
      * 
      * Case sensitivity is set to false by default.
      * 
