@@ -44,7 +44,7 @@ public class MainTest
 //            lcs.registerCommand("y {oops {", new CommandTester("woops"));
 //            lcs.registerCommand("z { lady dady da", new CommandTester("dang"));
 //        
-//            lcs.registerCommand("{home set}|sethome", new CommandTester("woot"));
+            lcs.registerCommand("{home set}|sethome", new CommandTester("woot"));
             lcs.registerCommand("home", new CommandTester("weiew"));
             lcs.registerCommand("homenwinnigish", new CommandTester("Chicken n' winnigish"));
 //            lcs.registerCommand("home", new CommandTester("weiew"));
