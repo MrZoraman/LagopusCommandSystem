@@ -122,7 +122,7 @@ public class CommandSystem<T>
      * 
      * @see #setCaseSensitive(boolean) setCaseSensitive
      */
-    public boolean isIsCaseSensitive()
+    public boolean isCaseSensitive()
     {
         return SyntaxElement.isCaseSensitive();
     }
