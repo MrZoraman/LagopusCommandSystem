@@ -97,6 +97,21 @@ public class CommandSystem<T>
     }
     
     /**
+     * Gets the unknown command.
+     * 
+     * This returns the unknown command, or null is no unknown command has
+     * been set.
+     * 
+     * @return The unknown command.
+     * 
+     * @see #setUnknownCommand(java.lang.Object) setUnknownCommand
+     */
+    public T getUnknownCommand()
+    {
+        return unknownCommand;
+    }
+    
+    /**
      * Prints the command tree to a prinstream.
      * 
      * This prints out the structure of the command tree. It shows what the
