@@ -12,19 +12,21 @@ import java.util.Arrays;
 public class ParseFailException extends RuntimeException
 {
     private final int[] parseFailIndexes;
-    private String problemSyntax = null;
+    private final String problemSyntax;
     
-    public ParseFailException(String message, int... parseFailIndex)
+    public ParseFailException(String message, String problemSyntax, int... parseFailIndex)
     {
         super(message);
         this.parseFailIndexes = parseFailIndex;
+        this.problemSyntax = problemSyntax;
+        
         Arrays.sort(parseFailIndexes);
     }
     
-    public void setProblemSyntax(String problemSyntax)
-    {
-        this.problemSyntax = problemSyntax;
-    }
+//    public void setProblemSyntax(String problemSyntax);
+//    {
+//        this.problemSyntax = problemSyntax;
+//    }
     
     public String getProblemSyntax(String problemSyntax)
     {

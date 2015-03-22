@@ -20,12 +20,12 @@ public class SpaceParser extends SyntaxParserBase
         switch(c)
         {
             case '{':
-                if(inBraces) throw new ParseFailException("Braces are already open!", index, openBraceIndex);
+                if(inBraces) throw new ParseFailException("Braces are already open!", script, index, openBraceIndex);
                 inBraces = true;
                 openBraceIndex = index;
                 break;
             case '}':
-                if(!inBraces) throw new ParseFailException("Braces don't match!", index);
+                if(!inBraces) throw new ParseFailException("Braces don't match!", script, index);
                 inBraces = false;
                 break;
             case ' ':
@@ -43,6 +43,6 @@ public class SpaceParser extends SyntaxParserBase
     @Override
     protected void finished()
     {
-        if(inBraces) throw new ParseFailException("Braces are still open!", openBraceIndex);
+        if(inBraces) throw new ParseFailException("Braces are still open!", script, openBraceIndex);
     }
 }

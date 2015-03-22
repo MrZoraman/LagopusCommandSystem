@@ -9,10 +9,10 @@ import java.util.List;
  */
 public abstract class SyntaxParserBase
 {
-    private final String script;
-    
     private final StringBuilder builder = new StringBuilder();
     private final List<String> elements = new ArrayList<>();
+    
+    protected final String script;
     
     public SyntaxParserBase(String script)
     {

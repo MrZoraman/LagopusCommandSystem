@@ -61,7 +61,7 @@ public class CommandSystem<T>
         }
         catch (ParseFailException e)
         {
-            e.setProblemSyntax(syntax);
+//            e.setProblemSyntax(syntax);
             if(safeParsingMode)
             {
                 throw e;
