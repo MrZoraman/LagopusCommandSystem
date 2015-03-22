@@ -12,7 +12,6 @@ import java.util.Arrays;
 public class ParseFailException extends RuntimeException
 {
     private final int[] parseFailIndexes;
-    int indexRetrieved = 0;//TODO: what
     private String problemSyntax = null;
     
     public ParseFailException(String message, int... parseFailIndex)
