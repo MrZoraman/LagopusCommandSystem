@@ -8,6 +8,8 @@ import java.util.Arrays;
  * error.
  *
  * @author MrZoraman
+ * 
+ * @see #printInfo(java.io.PrintStream) printInfo
  */
 public class ParseFailException extends RuntimeException
 {
