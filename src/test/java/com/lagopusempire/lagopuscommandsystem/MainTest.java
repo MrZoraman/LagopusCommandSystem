@@ -29,8 +29,6 @@ public class MainTest
         {
             CommandSystem<ICommand> lcs = new CommandSystem<>();
             
-            lcs.setSafeParsingMode(false);
-            
             lcs.registerCommand("a", new CommandTester("Hello!"));
             lcs.registerCommand("a b", new CommandTester("Wah!"));
             //TODO: 'ab' = wah!
@@ -49,7 +47,7 @@ public class MainTest
             lcs.registerCommand("t * w v", new CommandTester("uwot"));
 //            
 //        lcs.registerCommand("x } oops", new CommandTester("oops"));
-        lcs.registerCommand("y {oops {", new CommandTester("woops"));
+//        lcs.registerCommand("y {oops {", new CommandTester("woops"));
 ////        lcs.registerCommand("z { lady dady da", new CommandTester("dang"));
 //        
 //        lcs.registerCommand("{home set}|sethome", new CommandTester("woot"));
