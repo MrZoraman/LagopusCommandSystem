@@ -91,6 +91,8 @@ public class MainTest
         public void execute(String[] preArgs, String[] args)
         {
             System.out.println("Command executed!");
+            System.out.println("args.length: " + args.length);
+            System.out.println("preArgs.length: " + preArgs.length);
             System.out.println("preArgs: " + Arrays.toString(preArgs));
             System.out.println("args: " + Arrays.toString(args));
             System.out.println("Message: " + str);

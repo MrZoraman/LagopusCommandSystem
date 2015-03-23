@@ -74,6 +74,11 @@ public class CommandSystem<T>
             result.command = unknownCommand;
         }
         
+        if(result.args[0].equals(""))
+        {
+            result.args = new String[0];
+        }
+        
         return result;
     }
     
