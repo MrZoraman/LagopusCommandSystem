@@ -1,10 +1,7 @@
 package com.lagopusempire.lagopuscommandsystem;
 
-import java.util.Arrays;
-import java.util.Scanner;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
@@ -12,128 +9,78 @@ import org.junit.runner.notification.Failure;
  */
 public class MainTest
 {
-    public static void main(String[] args)
+    @Test
+    public void virtualPathTest()
     {
-        Result result = JUnitCore.runClasses(MainTest.class);
-        for(Failure failure : result.getFailures())
-        {
-            System.out.println(failure.toString());
-        }
+        CommandSystem<Integer> lcs = new CommandSystem<>();
         
-        new MainTest().testRun();
+        lcs.registerCommand("", 0);
+        lcs.registerCommand("a", 1);
+        lcs.registerCommand("a b", 2);
+        lcs.registerCommand("b", 3);
+        lcs.registerCommand("b c|d", 4);
+        lcs.registerCommand("e f|g h", 5);
+        lcs.registerCommand("i j|{k l}", 6);
+        lcs.registerCommand("n * o", 7);
+        lcs.registerCommand("p * q * s", 8);
+        lcs.registerCommand("t * * v", 9);
+        lcs.registerCommand("t * w v", 10);
+        
+        lcs.registerCommand("{home set}|sethome", 11);
+        lcs.registerCommand("home", 12);
+        lcs.registerCommand("homenwinnigish", 13);
+        
+        lcs.setUnknownCommand(14);
+        
+        assertEquals(0, (long) lcs.getCommand("").command);
+        assertEquals(1, (long) lcs.getCommand("a").command);
+        assertEquals(2, (long) lcs.getCommand("a b").command);
+        assertEquals(3, (long) lcs.getCommand("b").command);
+        assertEquals(4, (long) lcs.getCommand("b c").command);
+        assertEquals(4, (long) lcs.getCommand("b d").command);
+        assertEquals(5, (long) lcs.getCommand("e f h").command);
+        assertEquals(5, (long) lcs.getCommand("e g h").command);
+        assertEquals(6, (long) lcs.getCommand("i j").command);
+        assertEquals(6, (long) lcs.getCommand("i k l").command);
+        assertEquals(7, (long) lcs.getCommand("n ? o").command);
+        assertEquals(8, (long) lcs.getCommand("p ? q ? s").command);
+        assertEquals(9, (long) lcs.getCommand("t ? ? v").command);
+        assertEquals(10, (long) lcs.getCommand("t ? w v").command);
+        assertEquals(11, (long) lcs.getCommand("home set").command);
+        assertEquals(11, (long) lcs.getCommand("sethome").command);
+        assertEquals(12, (long) lcs.getCommand("home").command);
+        assertEquals(13, (long) lcs.getCommand("homenwinnigish").command);
+        //assertEquals(14, (long) lcs.getCommand("stuff").command);
     }
     
-    public void testRun()
+    @Test
+    public void testUnkownCommand()
     {
-        try (Scanner scan = new Scanner(System.in))
-        {
-            CommandSystem<ICommand> lcs = new CommandSystem<>();
-            lcs.setCaseSensitive(true);
-            
-            lcs.registerCommand("a", new CommandTester("Hello!"));
-            lcs.registerCommand("a b", new CommandTester("Wah!"));
-            lcs.registerCommand("b", new CommandTester("Hello again!"));
-            lcs.registerCommand("b c|d", new CommandTester("woah!"));
-            lcs.registerCommand("e f|g h", new CommandTester("dayum!"));
-            lcs.registerCommand("i j|{k l} m", new CommandTester("woot!"));
-            lcs.registerCommand("n * o", new CommandTester("the world is broken!"));
-            lcs.registerCommand("p * q * s", new CommandTester("I don't even know at this point!"));
-            lcs.registerCommand("t * * v", new CommandTester("why?!"));
-            lcs.registerCommand("t * w v", new CommandTester("uwot"));
-//            
-//            lcs.registerCommand("x } oops", new CommandTester("oops"));
-//            lcs.registerCommand("y {oops {", new CommandTester("woops"));
-//            lcs.registerCommand("z { lady dady da", new CommandTester("dang"));
-//        
-            lcs.registerCommand("{home set}|sethome", new CommandTester("woot"));
-            lcs.registerCommand("home", new CommandTester("weiew"));
-            lcs.registerCommand("homenwinnigish", new CommandTester("Chicken n' winnigish"));
-//            lcs.registerCommand("home", new CommandTester("weiew"));
-            
-//            lcs.registerCommand("", new CommandTester("wot"));
-            
-            lcs.setUnknownCommand(new CommandTester("I have no clue what that is"));
-            
-            lcs.printCommandTree(System.out);
-            
-            while(true)
-            {
-                System.out.print("> ");
-                String input = scan.nextLine();
-                if(input.equalsIgnoreCase("exit"))
-                    break;
-                else
-                {
-                    CommandResult<ICommand> result = lcs.getCommand(input);
-                    if(result.command == null)
-                    {
-                        System.out.println("Command not found!");
-                    }
-                    else
-                    {
-                        result.command.execute(result.preArgs, result.args);
-                    }
-                }
-            }
-        }
+        CommandSystem<Integer> lcs = new CommandSystem<>();
+        assertNull(lcs.getCommand("stuff").command);
     }
     
-    class CommandTester implements ICommand
+    @Test
+    public void testArguments()
     {
-        private final String str;
+        CommandSystem<Integer> lcs = new CommandSystem<>();
+        lcs.registerCommand("cmd", 0);
         
-        public CommandTester(String str)
-        {
-            this.str = str;
-        }
-        
-        @Override
-        public void execute(String[] preArgs, String[] args)
-        {
-            System.out.println("Command executed!");
-            System.out.println("args.length: " + args.length);
-            System.out.println("preArgs.length: " + preArgs.length);
-            System.out.println("preArgs: " + Arrays.toString(preArgs));
-            System.out.println("args: " + Arrays.toString(args));
-            System.out.println("Message: " + str);
-        }
+        CommandResult<Integer> result = lcs.getCommand("cmd arg0 arg1 arg2");
+        assertEquals(0, (long) result.command);
+        assertEquals("arg0", result.args[0]);
+        assertEquals("arg1", result.args[1]);
+        assertEquals("arg2", result.args[2]);
     }
     
-//    @Test
-//    public void syntaxPrintTest()
-//    {
-//        Syntax root = new Syntax();
-//        
-//        String[] cmd1 = {"a", "b", "c"};
-//        String[] cmd2 = {"a", "b", "d"};
-//        String[] cmd3 = {"a", "b", "e"};
-//        String[] cmd4 = {"a", "f"};
-//        String[] cmd5 = {"a", "g"};
-//        String[] cmd6 = {"h"};
-//        String[] cmd7 = {"a"};
-//        
-//        root.addSyntax(cmd1, new TestCommand());
-//        root.addSyntax(cmd2, new TestCommand());
-//        root.addSyntax(cmd3, new TestCommand());
-//        root.addSyntax(cmd4, new TestCommand());
-//        root.addSyntax(cmd5, new TestCommand());
-//        root.addSyntax(cmd6, new TestCommand());
-//        root.addSyntax(cmd7, new TestCommand());
-//        
-//        root.print(0);
-//        
-//        System.out.println("---");
-//        String[] cmd8 = {"a", "b|c", "d"};
-//        root = new Syntax();
-//        root.addSyntax(cmd8, new TestCommand());
-//        root.print(0);
-//    }
-//    
-//    private class TestCommand implements ICommand
-//    {
-//        @Override
-//        public void execute(String[] preArgs, String[] args)
-//        {
-//        }
-//    }
+    @Test
+    public void testPreArguments()
+    {
+        CommandSystem<Integer> lcs = new CommandSystem<>();
+        lcs.registerCommand("cmd * part2", 0);
+        
+        CommandResult<Integer> result = lcs.getCommand("cmd test part2");
+        assertEquals(0, (long) result.command);
+        assertEquals("test", result.preArgs[0]);
+    }
 }
