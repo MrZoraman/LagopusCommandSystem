@@ -69,7 +69,7 @@ Add this to your repositories:
 <repository>
     <id>Lagopus Empire Repo</id>
     <name>Lagopus Empire Repo-releases</name>
-    <url>http://repo.lagopusempire.com/artifactory/lagopus-empire-repo</url>
+    <url>http://repo.lagopusempire.com:3000</url>
 </repository>
 ```
 Add this to your dependencies
