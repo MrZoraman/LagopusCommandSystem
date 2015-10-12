@@ -55,6 +55,13 @@
                 <version>2.10.1</version>
             </plugin>
         </plugins>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ftp</artifactId>
+                <version>2.10</version>
+            </extension>
+        </extensions>
     </build>
     
     <licenses>
@@ -69,7 +76,7 @@
         <repository>
             <id>lago-repo</id>
             <name>Lagopus Empire Repo-releases</name>
-            <url>http://repo.lagopusempire.com/artifactory/lagopus-empire-repo</url>
+            <url>ftp://repo.lagopusempire.com:7090/repo/</url>
         </repository>
     </distributionManagement>
 </project>
