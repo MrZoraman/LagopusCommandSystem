@@ -68,16 +68,12 @@ public class CommandSystem<T>
     {
         final CommandResult<T> result = root.matchCommand(input, new ArrayList<String>());
         
-        if(result.command == null)
+        if(!result.command.isPresent())
         {
             result.args = input.split(" ");
             result.preArgs = new String[0];
             
-            if(unknownCommand == null)
-            {
-                result.command = Optional.empty();
-            }
-            else
+            if(unknownCommand != null)
             {
                 result.command = Optional.of(unknownCommand);
             }
