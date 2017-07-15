@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -62,7 +63,7 @@ class SyntaxElement<T>
         if(bestMatchPack == null || bestMatchPack.bestMatch == null)
         {
             final CommandResult<T> result = new CommandResult<>();
-            result.command = command;
+            result.command = Optional.ofNullable(command);
             result.args = path.split(" ");
             result.preArgs = preArgs.toArray(new String[preArgs.size()]);
             return result;

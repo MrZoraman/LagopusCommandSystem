@@ -32,24 +32,24 @@ public class MainTest
         
         lcs.setUnknownCommand(14);
         
-        assertEquals(0, (long) lcs.getCommand("").command);
-        assertEquals(1, (long) lcs.getCommand("a").command);
-        assertEquals(2, (long) lcs.getCommand("a b").command);
-        assertEquals(3, (long) lcs.getCommand("b").command);
-        assertEquals(4, (long) lcs.getCommand("b c").command);
-        assertEquals(4, (long) lcs.getCommand("b d").command);
-        assertEquals(5, (long) lcs.getCommand("e f h").command);
-        assertEquals(5, (long) lcs.getCommand("e g h").command);
-        assertEquals(6, (long) lcs.getCommand("i j").command);
-        assertEquals(6, (long) lcs.getCommand("i k l").command);
-        assertEquals(7, (long) lcs.getCommand("n ? o").command);
-        assertEquals(8, (long) lcs.getCommand("p ? q ? s").command);
-        assertEquals(9, (long) lcs.getCommand("t ? ? v").command);
-        assertEquals(10, (long) lcs.getCommand("t ? w v").command);
-        assertEquals(11, (long) lcs.getCommand("home set").command);
-        assertEquals(11, (long) lcs.getCommand("sethome").command);
-        assertEquals(12, (long) lcs.getCommand("home").command);
-        assertEquals(13, (long) lcs.getCommand("homenwinnigish").command);
+        assertEquals(0, (long) lcs.getCommand("").command.get());
+        assertEquals(1, (long) lcs.getCommand("a").command.get());
+        assertEquals(2, (long) lcs.getCommand("a b").command.get());
+        assertEquals(3, (long) lcs.getCommand("b").command.get());
+        assertEquals(4, (long) lcs.getCommand("b c").command.get());
+        assertEquals(4, (long) lcs.getCommand("b d").command.get());
+        assertEquals(5, (long) lcs.getCommand("e f h").command.get());
+        assertEquals(5, (long) lcs.getCommand("e g h").command.get());
+        assertEquals(6, (long) lcs.getCommand("i j").command.get());
+        assertEquals(6, (long) lcs.getCommand("i k l").command.get());
+        assertEquals(7, (long) lcs.getCommand("n ? o").command.get());
+        assertEquals(8, (long) lcs.getCommand("p ? q ? s").command.get());
+        assertEquals(9, (long) lcs.getCommand("t ? ? v").command.get());
+        assertEquals(10, (long) lcs.getCommand("t ? w v").command.get());
+        assertEquals(11, (long) lcs.getCommand("home set").command.get());
+        assertEquals(11, (long) lcs.getCommand("sethome").command.get());
+        assertEquals(12, (long) lcs.getCommand("home").command.get());
+        assertEquals(13, (long) lcs.getCommand("homenwinnigish").command.get());
         //assertEquals(14, (long) lcs.getCommand("stuff").command);
     }
     
@@ -57,7 +57,9 @@ public class MainTest
     public void testUnkownCommand()
     {
         CommandSystem<Integer> lcs = new CommandSystem<>();
-        assertNull(lcs.getCommand("stuff").command);
+        CommandResult<Integer> cmdResult = lcs.getCommand("stuff");
+        assertNotNull(cmdResult);
+        assertFalse(cmdResult.command.isPresent());
     }
     
     @Test
@@ -67,7 +69,7 @@ public class MainTest
         lcs.registerCommand("cmd", 0);
         
         CommandResult<Integer> result = lcs.getCommand("cmd arg0 arg1 arg2");
-        assertEquals(0, (long) result.command);
+        assertEquals(0, (long) result.command.get());
         assertEquals("arg0", result.args[0]);
         assertEquals("arg1", result.args[1]);
         assertEquals("arg2", result.args[2]);
@@ -80,7 +82,7 @@ public class MainTest
         lcs.registerCommand("cmd * part2", 0);
         
         CommandResult<Integer> result = lcs.getCommand("cmd test part2");
-        assertEquals(0, (long) result.command);
+        assertEquals(0, (long) result.command.get());
         assertEquals("test", result.preArgs[0]);
     }
 }

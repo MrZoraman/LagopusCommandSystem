@@ -4,6 +4,7 @@ import com.lagopusempire.lagopuscommandsystem.parsing.ParseFailException;
 import com.lagopusempire.lagopuscommandsystem.parsing.SpaceParser;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * Primary class for the library.
@@ -67,11 +68,19 @@ public class CommandSystem<T>
     {
         final CommandResult<T> result = root.matchCommand(input, new ArrayList<String>());
         
-        if(result.command == null && unknownCommand != null)
+        if(result.command == null)
         {
             result.args = input.split(" ");
             result.preArgs = new String[0];
-            result.command = unknownCommand;
+            
+            if(unknownCommand == null)
+            {
+                result.command = Optional.empty();
+            }
+            else
+            {
+                result.command = Optional.of(unknownCommand);
+            }
         }
         
         if(result.args[0].equals(""))

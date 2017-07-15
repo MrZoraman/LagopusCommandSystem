@@ -1,5 +1,7 @@
 package com.lagopusempire.lagopuscommandsystem;
 
+import java.util.Optional;
+
 /**
  * A package of relevant data returned by the command system given user input.
  * 
@@ -18,7 +20,7 @@ public class CommandResult<T>
      * 
      * If no command was found, this will be null.
      */
-    public T command;
+    public Optional<T> command;
     
     /**
      * The arguments that were read from the wildcards specified in the syntax.
