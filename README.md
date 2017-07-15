@@ -11,10 +11,6 @@ There's a little bit more you have to do on your side, so it's not plug
 and play. However, you also get a large amount of control over how the
 command system works.
 
-# Javadoc
-I have [javadocs](http://jd.lagopusempire.com/lcs/)!
-If it's not documented, then you shoudln't need to use it.
-
 # Simple code example
 First you need a class that the command system will manage. This can be 
 anything you want.
@@ -62,21 +58,3 @@ Some examples are listed below:
 `a * c` -> this matches input "a * c", where * can be anything. Wildcard inputs are put in the preArgs array.
 
 There are more examples in the unit tests.
-
-# maven
-Add this to your repositories:
-```xml
-<repository>
-    <id>Lagopus Empire Repo</id>
-    <name>Lagopus Empire Repo-releases</name>
-    <url>http://repo.lagopusempire.com:3000</url>
-</repository>
-```
-Add this to your dependencies
-```xml
-<dependency>
-    <artifactId>LagopusCommandSystem</artifactId>
-    <groupId>com.lagopusempire</groupId>
-    <version>1.3.1</version>
-</dependency>
-```
