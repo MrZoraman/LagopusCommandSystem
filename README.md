@@ -17,7 +17,7 @@ anything you want.
 ```java
 interface ICommand
 {
-    public void execute(String[] preArgs, String[] args);
+    void execute(String[] preArgs, String[] args);
 }
 ```
 
